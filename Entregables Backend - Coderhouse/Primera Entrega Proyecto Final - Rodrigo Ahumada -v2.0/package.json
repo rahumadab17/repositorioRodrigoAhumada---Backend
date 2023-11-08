@@ -1,16 +1,16 @@
 {
   "type": "module",
-  "name": "entregable-3.0",
+  "name": "primera-entrega-proyecto-final---rodrigo-ahumada--v2.0",
   "version": "1.0.0",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node src/app.js",
-    "dev": "nodemon -e 'js,html' src/app.js"
+    "start": "node src/server.js",
+    "dev": "nodemon -e 'js,mjs,json,html' src/server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
     "express": "^4.18.2"
   }
