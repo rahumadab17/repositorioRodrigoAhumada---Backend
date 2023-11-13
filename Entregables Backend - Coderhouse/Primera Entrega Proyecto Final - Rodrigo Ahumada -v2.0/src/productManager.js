@@ -2,7 +2,7 @@ import fs from 'fs'
 
 export class ProductManager {
   constructor() {
-    this.path = ('C:/Users/roro_/Documents/GitHub/repositorioRodrigoAhumada/Entregables Backend - Coderhouse/Primera Entrega Proyecto Final - Rodrigo Ahumada -v2.0/src/products.json');
+    this.path = ('./src/products.json');
     this.products = this.loadProducts();
     this.nextProductId = this.products.length + 1;
   }
