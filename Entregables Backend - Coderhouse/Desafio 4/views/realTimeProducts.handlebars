@@ -1,0 +1,62 @@
+<!-- views/realTimeProducts.handlebars -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Products</title>
+</head>
+<body>
+    <h1>Real-Time Products</h1>
+    <ul>
+        {{#each products}}
+            <li>{{this.title}} - {{this.description}} - {{this.price}}</li>
+        {{/each}}
+    </ul>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+
+        // Escuchar eventos de actualización de productos
+        socket.on('updateProducts', (products) => {
+            // Actualizar la lista de productos en tiempo real
+            // Puedes manipular el DOM aquí o simplemente recargar la página
+            location.reload();
+        });
+    </script>
+</body>
+</html>
+
+<!-- Agregar al final del archivo -->
+<form id="addProductForm" method="POST" action="/api/products">
+    <label for="productName">Nombre del Producto:</label>
+    <input type="text" id="productName" name="title" required>
+    
+    <label for="productDescription">Descripción del Producto:</label>
+    <input type="text" id="productDescription" name="description" required>
+    
+    <label for="productPrice">Precio del Producto:</label>
+    <input type="number" id="productPrice" name="price" required>
+    
+    <label for="productCategory">Categoría del Producto:</label>
+    <input type="text" id="productCategory" name="category" required>
+    
+    <label for="productThumbnail">URL del Thumbnail:</label>
+    <input type="text" id="productThumbnail" name="thumbnail" required>
+    
+    <label for="productCode">Código del Producto:</label>
+    <input type="text" id="productCode" name="code" required>
+    
+    <label for="productStock">Stock del Producto:</label>
+    <input type="number" id="productStock" name="stock" required>
+    
+    <label for="productStatus">Estado del Producto:</label>
+    <input type="checkbox" id="productStatus" name="status" checked>
+
+    <button type="submit">Agregar Producto</button>
+</form>
+
+<script>
+    // No necesitas el script de Socket.io aquí ya que este formulario trabaja con HTTP
+</script>
