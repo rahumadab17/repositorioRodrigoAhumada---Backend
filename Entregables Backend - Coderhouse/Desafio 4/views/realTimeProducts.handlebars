@@ -1,4 +1,3 @@
-<!-- views/realTimeProducts.handlebars -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,17 +17,13 @@
     <script>
         const socket = io();
 
-        // Escuchar eventos de actualización de productos
         socket.on('updateProducts', (products) => {
-            // Actualizar la lista de productos en tiempo real
-            // Puedes manipular el DOM aquí o simplemente recargar la página
             location.reload();
         });
     </script>
 </body>
 </html>
 
-<!-- Agregar al final del archivo -->
 <form id="addProductForm" method="POST" action="/api/products">
     <label for="productName">Nombre del Producto:</label>
     <input type="text" id="productName" name="title" required>
@@ -52,7 +47,7 @@
     <input type="number" id="productStock" name="stock" required>
     
     <label for="productStatus">Estado del Producto:</label>
-    <input type="checkbox" id="productStatus" name="status" checked>
+    <input type="text" id="productStatus" name="status" required>
 
     <button type="submit">Agregar Producto</button>
 </form>

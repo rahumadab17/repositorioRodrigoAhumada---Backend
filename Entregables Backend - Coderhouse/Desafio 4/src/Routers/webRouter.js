@@ -7,10 +7,10 @@ export const webRouter = express.Router()
 
 webRouter.get('/', (req, res) => {
     const products = productManager.getProducts();
-    res.render('home', { products });
+    res.render('home', { products }); 
 })
 
 webRouter.get('/realtimeproducts', (req, res) => {
     const products = productManager.getProducts();
-    res.render('realtimeproducts', { products });
+    res.render('realTimeProducts', { products });
   });

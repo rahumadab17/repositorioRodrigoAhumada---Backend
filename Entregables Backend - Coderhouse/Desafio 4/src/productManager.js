@@ -29,6 +29,7 @@ export class ProductManager {
 
   addProduct(productData) {
     const { title, description, price, category, thumbnail, code, status = true, stock } = productData;
+    console.log(productData)
     if (!title || !description || !price || !category || !thumbnail || !code || stock  === undefined) {
       console.error('Todos los campos son obligatorios.');
       return;
@@ -52,6 +53,8 @@ export class ProductManager {
     };
     this.products.push(newProduct);
     this.saveProducts();
+
+    console.log('Producto añadido exitosamente.');
   }
 
   getProducts() {

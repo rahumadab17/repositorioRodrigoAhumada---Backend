@@ -16,17 +16,18 @@ const io = new Server(server);
 export const productManager = new ProductManager;
 export const cartManager = new CartManager;
 
+app.engine('.handlebars', engine());
+app.set('view engine', '.handlebars');
+app.set('views', './views');
+
 app.use(express.json());
+app.use('/static', express.static('./static'));
 
 app.use('/api/products', productsRouter);
 app.use('/api/carts', cartsRouter);
 app.use('/', webRouter)
-app.use('/realtimeproducts', webRouter)
+app.use('/realTimeProducts', webRouter)
 
-app.engine('.handlebars', engine());
-app.set('views', './views');
-app.set('view engine', '.handlebars');
-app.use('/static', express.static('./static'));
 
 // Socket.io setup
 io.on('connection', (socket) => {
@@ -39,12 +40,14 @@ io.on('connection', (socket) => {
   socket.on('addProduct', (productData) => {
     productManager.addProduct(productData);
     io.emit('updateProducts', productManager.getProducts());
+    console.log('Producto agregado exitosamente');
   });
 
   // Manejar eventos cuando se elimina un producto
   socket.on('deleteProduct', (productId) => {
     productManager.deleteProduct(productId);
     io.emit('updateProducts', productManager.getProducts());
+    console.log('Producto eliminado exitosamente')
   });
 
   // Manejar eventos de desconexión
