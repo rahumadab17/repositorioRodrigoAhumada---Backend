@@ -26,7 +26,7 @@ productsRouter.get('/:pid', (req, res) => {
 productsRouter.post('/', (req, res) => {
   try {
     const newProduct = req.body;
-    console.log(req)
+    console.log({newProduct})
     productManager.addProduct(newProduct);
     res.status(201).json(newProduct);
   } catch (error) {

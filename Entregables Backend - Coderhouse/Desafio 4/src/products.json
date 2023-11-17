@@ -64,5 +64,16 @@
     "code": "satirobr",
     "stock": 10,
     "status": true
+  },
+  {
+    "id": 7,
+    "title": "Canyon 350",
+    "description": "Canyon 350 2x8",
+    "price": "1999990",
+    "category": "Ruta",
+    "thumbnail": "canyon350.jpg",
+    "code": "canyon350",
+    "stock": "15",
+    "status": "true"
   }
 ]
