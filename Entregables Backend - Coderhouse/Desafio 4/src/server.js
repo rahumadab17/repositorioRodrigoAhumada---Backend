@@ -6,7 +6,8 @@ import { ProductManager } from './productManager.js';
 import { CartManager } from './cartManager.js';
 import { productsRouter } from './Routers/productsRouter.js';
 import { cartsRouter } from './Routers/cartsRouter.js';
-import { webRouter } from './Routers/webRouter.js';
+import { homeRouter } from './Routers/homeRouter.js';
+import { realTimeProductsRouter } from './Routers/realTimeProductsRouter.js';
 
 const port = 8080;
 const app = express();
@@ -26,8 +27,8 @@ app.use('/static', express.static('./static'));
 
 app.use('/api/products', productsRouter);
 app.use('/api/carts', cartsRouter);
-app.use('/', webRouter)
-app.use('/realTimeProducts', webRouter)
+app.use('/', homeRouter)
+app.use('/', realTimeProductsRouter)
 
 
 // Socket.io setup

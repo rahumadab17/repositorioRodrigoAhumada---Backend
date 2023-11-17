@@ -3,14 +3,10 @@ import { ProductManager } from "../productManager.js";
 
 const productManager = new ProductManager
 
-export const webRouter = express.Router()
+export const realTimeProductsRouter = express.Router()
 
-webRouter.get('/', (req, res) => {
-    const products = productManager.getProducts();
-    res.render('home', { products }); 
-})
-
-webRouter.get('/realtimeproducts', (req, res) => {
+realTimeProductsRouter.get('/realtimeproducts', (req, res) => {
     const products = productManager.getProducts();
     res.render('realTimeProducts', { products });
   });
+
