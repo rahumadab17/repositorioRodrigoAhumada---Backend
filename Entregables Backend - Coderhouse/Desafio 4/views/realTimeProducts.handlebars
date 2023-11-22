@@ -1,16 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<<<<<<< Updated upstream
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Real-Time Productssss</title>
-=======
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
    <title>Real-Time Products</title>
->>>>>>> Stashed changes
 </head>
 <body>
     <h1>Real-Time Products</h1>
@@ -23,20 +17,6 @@
         margin: left; 
     }
 
-<<<<<<< Updated upstream
-    <script src="/socket.io/socket.io.js"></script>
-    <script>
-        const socket = io();
-
-        socket.on('updateProducts', (products) => {
-            location.reload();
-        });
-    </script>
-</body>
-</html>
-
-<form id="addProductForm" method="POST" action="/api/products">
-=======
     label {
         margin-bottom: 8px;
     }
@@ -46,7 +26,6 @@
     }
 </style>
 <form id="addProductForm">
->>>>>>> Stashed changes
     <label for="productName">Nombre del Producto:</label>
     <input type="text" id="productName" name="title" required>
     
@@ -74,14 +53,8 @@
     <button type="submit" onclick="addProduct()">Agregar Producto</button>
 </form>
 
-<<<<<<< Updated upstream
-<script>
-    // No necesitas el script de Socket.io aquí ya que este formulario trabaja con HTTP
-</script>
-=======
 <script src="/static/js/script.js"></script> 
 
 </body>
 </html>
 
->>>>>>> Stashed changes

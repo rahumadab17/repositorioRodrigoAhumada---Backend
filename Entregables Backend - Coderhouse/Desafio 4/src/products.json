@@ -74,9 +74,7 @@
     "thumbnail": "canyon350.jpg",
     "code": "canyon350",
     "stock": "15",
-    "status": "true"
-<<<<<<< Updated upstream
-=======
+    "status": true
   },
   {
     "id": 8,
@@ -87,7 +85,7 @@
     "thumbnail": "grevolt1",
     "code": "gr1",
     "stock": "15",
-    "status": "true"
+    "status": true
   },
   {
     "id": 9,
@@ -99,6 +97,5 @@
     "code": "oxfo5",
     "stock": "15",
     "status": true
->>>>>>> Stashed changes
   }
 ]
