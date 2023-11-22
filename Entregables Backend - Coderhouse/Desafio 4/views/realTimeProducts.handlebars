@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Real-Time Productssss</title>
+    <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
+    <title>Real-Time Products</title>
 </head>
 <body>
     <h1>Real-Time Products</h1>
@@ -13,18 +14,23 @@
         {{/each}}
     </ul>
 
-    <script src="/socket.io/socket.io.js"></script>
     <script>
         const socket = io();
 
         socket.on('updateProducts', (products) => {
-            location.reload();
-        });
+        // Lógica para actualizar la lista de productos en tu página
+        console.log('Lista de productos actualizada:', products);
+
+//        socket.on('productAdded', (productData) => {
+//            productManager.addProduct(productData);
+//            io.emit('updateProducts', productManager.getProducts());
+//            console.log('Producto agregado exitosamente');
+//        });
     </script>
 </body>
 </html>
 
-<form id="addProductForm" method="POST" action="/api/products">
+<form id="addProductForm" method="POST" action="/api/products" onsubmit="addProduct(event)">
     <label for="productName">Nombre del Producto:</label>
     <input type="text" id="productName" name="title" required>
     
@@ -53,5 +59,14 @@
 </form>
 
 <script>
-    // No necesitas el script de Socket.io aquí ya que este formulario trabaja con HTTP
+    function addProduct(event) {
+        event.preventDefault();
+    
+        const productName = document.getElementById('productName').value;
+        const productDescription = document.getElementById('productDescription').value    
+        const productPrice = document.getElementById('productPrice').value    
+
+        // Emitir el evento para agregar un producto
+        socket.emit('addProduct', { title: productName, description: productDescription, price: productPrice });
+      }
 </script>

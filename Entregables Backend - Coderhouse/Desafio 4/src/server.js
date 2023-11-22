@@ -41,7 +41,7 @@ io.on('connection', (socket) => {
   // Manejar eventos cuando se agrega un nuevo producto
   socket.on('addProduct', (productData) => {
     productManager.addProduct(productData);
-    io.emit('updateProducts', productManager.getProducts());
+    io.emit('productAdded', productManager.getProducts());
     console.log('Producto agregado exitosamente');
   });
 

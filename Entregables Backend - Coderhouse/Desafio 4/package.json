@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/server.js",
-    "dev": "nodemon -e js,mjs,json,html src/server.js"
+    "dev": "nodemon -e js,mjs,json,html,handlebars src/server.js"
   },
   "keywords": [],
   "author": "",
