@@ -1,18 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<<<<<<< Updated upstream
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Real-Time Productssss</title>
+=======
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
+   <title>Real-Time Products</title>
+>>>>>>> Stashed changes
 </head>
 <body>
     <h1>Real-Time Products</h1>
-    <ul>
-        {{#each products}}
-            <li>{{this.title}} - {{this.description}} - {{this.price}}</li>
-        {{/each}}
-    </ul>
+   <ul id="productsList"></ul>
+<style>
+    form {
+        display: flex;
+        flex-direction: column;
+        max-width: 300px; 
+        margin: left; 
+    }
 
+<<<<<<< Updated upstream
     <script src="/socket.io/socket.io.js"></script>
     <script>
         const socket = io();
@@ -25,6 +36,17 @@
 </html>
 
 <form id="addProductForm" method="POST" action="/api/products">
+=======
+    label {
+        margin-bottom: 8px;
+    }
+
+    #productStatus {
+        margin-bottom: 16px;
+    }
+</style>
+<form id="addProductForm">
+>>>>>>> Stashed changes
     <label for="productName">Nombre del Producto:</label>
     <input type="text" id="productName" name="title" required>
     
@@ -47,11 +69,19 @@
     <input type="number" id="productStock" name="stock" required>
     
     <label for="productStatus">Estado del Producto:</label>
-    <input type="text" id="productStatus" name="status" required>
+    <input type="checkbox" id="productStatus" name="status" checked>
 
-    <button type="submit">Agregar Producto</button>
+    <button type="submit" onclick="addProduct()">Agregar Producto</button>
 </form>
 
+<<<<<<< Updated upstream
 <script>
     // No necesitas el script de Socket.io aquí ya que este formulario trabaja con HTTP
 </script>
+=======
+<script src="/static/js/script.js"></script> 
+
+</body>
+</html>
+
+>>>>>>> Stashed changes

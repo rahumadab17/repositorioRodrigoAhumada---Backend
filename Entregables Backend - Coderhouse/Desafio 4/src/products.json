@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "title": "Marlin 5",
+    "title": "Trek Marlin 5",
     "description": "Trek Marlin 5 3x7",
     "price": 399990,
     "category": "MTB",
@@ -12,7 +12,7 @@
   },
   {
     "id": 2,
-    "title": "Marlin 7",
+    "title": "Trek Marlin 7",
     "description": "Trek Marlin 7 3x9",
     "price": 599990,
     "category": "MTB",
@@ -75,5 +75,30 @@
     "code": "canyon350",
     "stock": "15",
     "status": "true"
+<<<<<<< Updated upstream
+=======
+  },
+  {
+    "id": 8,
+    "title": "Giant Revolt 1 MY22",
+    "description": "Giant Revolt 1 MY22 2x10",
+    "price": "1249990",
+    "category": "Gravel",
+    "thumbnail": "grevolt1",
+    "code": "gr1",
+    "stock": "15",
+    "status": "true"
+  },
+  {
+    "id": 9,
+    "title": "Oxford Orion 5",
+    "description": "Oxford Orion 5 3x7",
+    "price": "599990",
+    "category": "MTB",
+    "thumbnail": "oorion5",
+    "code": "oxfo5",
+    "stock": "15",
+    "status": true
+>>>>>>> Stashed changes
   }
 ]
