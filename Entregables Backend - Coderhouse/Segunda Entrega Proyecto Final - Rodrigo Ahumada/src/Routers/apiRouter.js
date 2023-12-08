@@ -1,11 +1,8 @@
-import { Router, json } from "express"
-import { productsRouter } from "./productsRouter.js"
-import { initRouter } from "./initRouter.js"
-import { cartsRouter } from "./cartsRouter.js"
+import express from 'express';
+import cartsRouter from './cartsRouter.js';
+import productsRouter from './productsRouter.js';
 
-export const apiRouter = Router()
+export const apiRouter = express.Router();
 
-apiRouter.use(json())
-apiRouter.use('/products', productsRouter);
 apiRouter.use('/carts', cartsRouter);
-apiRouter.use('/dbInit', initRouter)
+apiRouter.use('/products', productsRouter);

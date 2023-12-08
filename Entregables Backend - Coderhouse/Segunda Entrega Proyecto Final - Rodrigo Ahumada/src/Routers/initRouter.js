@@ -1,4 +1,4 @@
-import { Router } from 'express'
+/* import { Router } from 'express'
 import { Product } from '../models/productsMongoose.js'
 import { Cart } from '../models/cartsMongoose.js'
 
@@ -19,3 +19,14 @@ initRouter.get('/', async (req, res) => {
     await Product.insertMany(dataSet)
     res.send('Base de datos creada')
 })
+ */
+
+// initRouter.js
+import express from 'express';
+
+export const initRouter = express.Router();
+
+// Endpoint para inicializar MongoDB u otras configuraciones iniciales...
+initRouter.get('/', (req, res) => {
+    res.send('Initialization route');
+});

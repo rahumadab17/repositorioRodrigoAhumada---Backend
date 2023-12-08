@@ -3,7 +3,7 @@ import  mongoose from 'mongoose';
 import { Server } from 'socket.io';
 import { engine } from 'express-handlebars';
 import { apiRouter } from './Routers/apiRouter.js';
-import { webRouter } from './Routers/webRouter.js';
+import { initRouter} from './Routers/initRouter.js';
 import { MONGODB_CNX_STR, PORT } from './config.js';
 import { Product } from './models/productsMongoose.js';
 import { Cart } from './models/cartsMongoose.js';
@@ -31,52 +31,82 @@ try {
 }
 
 app.use('/api', apiRouter);
-app.use('/', webRouter);
+app.use('/init', initRouter);
 
-io.on('connection', socket => {
-  console.log('Usuario conectado', socket.id);
+io.on('connection', (socket) => {
+  console.log('Cliente conectado:', socket.id);
 
-  socket.emit('mensajeServidor', 'Bienvenido a Rorro Bikes!')
+  // Evento para crear un nuevo carrito
+  socket.on('createCart', async () => {
+      try {
+          // Crear un nuevo carrito en la base de datos
+          const newCart = new Cart({ cart: [] });
+          await newCart.save();
 
-  socket.emit('actualizacion', { products: Product.find() });
+          // Emitir actualización de carritos activos a todos los clientes
+          const activeCarts = await Cart.find();
+          io.emit('updateActiveCarts', activeCarts);
+      } catch (error) {
+          console.error('Error al crear un nuevo carrito:', error);
+      }
+  });
 
-  socket.on('createNewCart', async (callback) => {
-    // Lógica para crear un nuevo carrito
+  // Evento para agregar un producto al carrito
+  socket.on('addToCart', async (productId) => {
     try {
-        const newCart = await Cart.create({ status: true, cart: [] });
-        console.log('Nuevo carrito creado:', newCart);
-        callback({ status: 'success' });
-        io.sockets.emit('viewCart', { cart: await Cart.findById(newCart._id).populate('cart.productID') });
-    } catch (error) {
-        console.error('Error al crear un nuevo carrito:', error);
-        callback({ status: 'error', error: error.message });
-    }
-});
+        // Buscar el producto en la base de datos
+        const product = await Product.findById(productId);
 
-socket.on('addToCart', async ({ productId }, callback) => {
-  const cartId = 'cart1';
-  try {
-    await Cart.addProductToCart(cartId, productId);
-    console.log('Producto agregado al carrito.');
-    callback({ status: 'success' });
-    io.emit('viewCart', { cart: (await Cart.findOne({ status: true })).cart });
-  } catch (error) {
-    console.error('Error al agregar producto al carrito:', error);
-    callback({ status: 'error', error: error.message });
-  }
-});
+        if (!product) {
+            console.error('Producto no encontrado');
+            return;
+        }
 
-socket.on('deleteCart', async ({ cartId }, callback) => {
-  // Lógica para eliminar el carrito
-  try {
-      await Cart.findByIdAndDelete(cartId);
-      console.log('Carrito eliminado.');
-      callback({ status: 'success' });
-      io.sockets.emit('viewCart', { cart: null }); // No hay carrito después de eliminar
-  } catch (error) {
-      console.error('Error al eliminar el carrito:', error);
-      callback({ status: 'error', error: error.message });
-  }
-});
+        // Obtener el ID único del carrito activo del usuario (puedes adaptar esto según tu lógica de usuario)
+        const activeCartId = socket.id; // Aquí asumo que estás utilizando el ID de Socket.IO como identificador único del usuario
 
-})
+        // Buscar el carrito activo del usuario en la base de datos
+        const activeCart = await Cart.findOne({ _id: activeCartId });
+
+        if (!activeCart) {
+            // Si no existe el carrito activo, crear uno nuevo
+            const newCart = new Cart({ _id: activeCartId, cart: [] });
+            await newCart.save();
+
+            // Usar el nuevo carrito como carrito activo
+            activeCart = newCart;
+
+            // Emitir actualización de carritos activos a todos los clientes
+            const activeCarts = await Cart.find();
+            io.emit('updateActiveCarts', activeCarts);
+        }
+
+          // Verificar si el producto ya está en el carrito
+          const existingItem = activeCart.cart.find(item => item.productID.toString() === productId);
+
+          if (existingItem) {
+              // Si el producto ya está en el carrito, aumentar la cantidad
+              existingItem.cant += 1;
+          } else {
+              // Si el producto no está en el carrito, agregarlo con cantidad 1
+              activeCart.cart.push({ productID: productId, cant: 1 });
+          }
+
+          // Guardar el carrito actualizado en la base de datos
+          await activeCart.save();
+
+          // Emitir actualización del carrito al cliente que realizó la acción
+          socket.emit('updateCart', activeCart);
+
+          // Emitir actualización del carrito a todos los clientes
+          io.emit('updateCart', activeCart);
+      } catch (error) {
+          console.error('Error al agregar producto al carrito:', error);
+      }
+  });
+
+  // Manejar desconexiones de Socket.IO
+  socket.on('disconnect', () => {
+      console.log('Cliente desconectado:', socket.id);
+  });
+});
