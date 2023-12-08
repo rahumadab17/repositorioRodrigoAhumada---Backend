@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "title": "Trek Marlin 5",
+    "description": "Trek Marlin 5 3x7",
+    "price": 399990,
+    "category": "MTB",
+    "thumbnail": "marlin5.jpg",
+    "code": "m5",
+    "stock": 10,
+    "status": true
+  },
+  {
+    "id": 2,
+    "title": "Trek Marlin 7",
+    "description": "Trek Marlin 7 3x9",
+    "price": 599990,
+    "category": "MTB",
+    "thumbnail": "marlin7.jpg",
+    "code": "m7",
+    "stock": 5,
+    "status": true
+  },
+  {
+    "id": 3,
+    "title": "Totem 340",
+    "description": "Totem 340 2x7",
+    "price": 359990,
+    "category": "Gravel",
+    "thumbnail": "totem340.jpg",
+    "code": "t340",
+    "stock": 15,
+    "status": true
+  },
+  {
+    "id": 4,
+    "title": "Scott Patron E-Ride 900",
+    "description": "Scott Patron E-Ride 900 Electrica",
+    "price": 1599990,
+    "category": "E-bike",
+    "thumbnail": "scotte900.jpg",
+    "code": "e900",
+    "stock": 5,
+    "status": true
+  },
+  {
+    "id": 5,
+    "title": "Cube Attain",
+    "description": "Cube Attain Ruta 3x11",
+    "price": 1299990,
+    "category": "Ruta",
+    "thumbnail": "cubeattain.jpg",
+    "code": "cattain1",
+    "stock": 7,
+    "status": true
+  },
+  {
+    "id": 6,
+    "title": "Satiro Breezer",
+    "description": "Satiro Breezer Gravel/Urban 1x10",
+    "price": 999990,
+    "category": "Gravel",
+    "thumbnail": "Satirobreezer.jpg",
+    "code": "satirobr",
+    "stock": 10,
+    "status": true
+  },
+  {
+    "id": 7,
+    "title": "Canyon 350",
+    "description": "Canyon 350 2x8",
+    "price": "1999990",
+    "category": "Ruta",
+    "thumbnail": "canyon350.jpg",
+    "code": "canyon350",
+    "stock": "15",
+    "status": true
+  },
+  {
+    "id": 8,
+    "title": "Giant Revolt 1 MY22",
+    "description": "Giant Revolt 1 MY22 2x10",
+    "price": "1249990",
+    "category": "Gravel",
+    "thumbnail": "grevolt1",
+    "code": "gr1",
+    "stock": "15",
+    "status": true
+  },
+  {
+    "id": 9,
+    "title": "Oxford Orion 5",
+    "description": "Oxford Orion 5 3x7",
+    "price": "599990",
+    "category": "MTB",
+    "thumbnail": "oorion5",
+    "code": "oxfo5",
+    "stock": "15",
+    "status": true
+  }
+]
