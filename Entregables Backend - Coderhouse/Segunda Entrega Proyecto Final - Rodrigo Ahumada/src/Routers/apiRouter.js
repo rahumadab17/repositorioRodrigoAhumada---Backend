@@ -1,8 +1,8 @@
 import express from 'express';
-import cartsRouter from './cartsRouter.js';
-import productsRouter from './productsRouter.js';
+import { productsRouter } from './productsRouter.js';
+import { cartsRouter } from './cartsRouter.js';
 
 export const apiRouter = express.Router();
 
-apiRouter.use('/carts', cartsRouter);
 apiRouter.use('/products', productsRouter);
+apiRouter.use('/carts', cartsRouter);

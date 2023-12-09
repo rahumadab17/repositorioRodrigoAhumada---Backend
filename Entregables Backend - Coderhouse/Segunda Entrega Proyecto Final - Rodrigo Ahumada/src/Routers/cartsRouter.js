@@ -2,13 +2,13 @@ import express from 'express';
 import { Product } from '../models/productsMongoose.js'
 import { Cart } from '../models/cartsMongoose.js'
 
-const cartsRouter = express.Router();
+export const cartsRouter = express.Router();
 
 // Endpoint para obtener todos los carritos
 cartsRouter.get('/', async (req, res) => {
     try {
         const carts = await Cart.find();
-        res.json(carts);
+        res.render('carts', { carts }); // Renderiza la vista 'carts' con los datos obtenidos
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -17,8 +17,9 @@ cartsRouter.get('/', async (req, res) => {
 // Endpoint para obtener un carrito por su ID
 cartsRouter.get('/:cartId', async (req, res) => {
     try {
+        // Obtener el carrito asociado al ID de Socket.IO (puedes usar el mismo ID)
         const cart = await Cart.findById(req.params.cartId).populate('cart.productID');
-        res.json(cart);
+        res.render('carts', { cart }); // Renderiza la vista 'carts' con los datos obtenidos
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -29,34 +30,55 @@ cartsRouter.post('/', async (req, res) => {
     try {
         const newCart = new Cart(req.body);
         await newCart.save();
-        res.json(newCart);
+        res.render('carts', { newCart }); // Renderiza la vista 'carts' con los datos obtenidos
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 });
 
 // Endpoint para agregar un producto al carrito
+// Endpoint para agregar un producto al carrito
 cartsRouter.post('/:cartId/addProduct', async (req, res) => {
     try {
         const { productID, cant } = req.body;
-        
-        // Verificar si el producto existe
-        const product = await Product.findById(productID);
-        if (!product) {
-            return res.status(404).json({ error: 'Producto no encontrado' });
-        }
 
+        // Convertir la cadena productID a un ObjectId válido
+        const validProductID = mongoose.Types.ObjectId(productID);
+        if (!mongoose.Types.ObjectId.isValid(validProductID)) {
+            return res.status(400).json({ error: 'ID de producto no válido' });
+        }
+        
         // Verificar si el carrito existe
-        const cart = await Cart.findById(req.params.cartId);
+        const cart = await Cart.findById(req.params.cartId).populate('cart.product');
         if (!cart) {
             return res.status(404).json({ error: 'Carrito no encontrado' });
         }
 
-        // Agregar el producto al carrito
-        cart.cart.push({ productID, cant });
+        // Verificar si el producto existe
+        const product = await Product.findById(validProductID);
+        if (!product) {
+            return res.status(404).json({ error: 'Producto no encontrado' });
+        }
+
+        // Verificar si el producto ya está en el carrito
+        const existingItemIndex = cart.cart.findIndex(item => item.productID.equals(validProductID));
+
+        if (existingItemIndex !== -1) {
+            // Si el producto ya está en el carrito, aumentar la cantidad
+            cart.cart[existingItemIndex].cant += cant;
+        } else {
+            // Si el producto no está en el carrito, agregarlo con la cantidad proporcionada
+            cart.cart.push({ product: validProductID, cant });
+        }
+
+        // Guardar el carrito actualizado en la base de datos
         await cart.save();
 
-        res.json(cart);
+        // Emitir actualización del carrito al cliente que realizó la acción
+        io.to(req.params.cartId).emit('updateCart', cart);
+
+        // Renderizar la vista 'carts' con el carrito actualizado
+        res.render('carts', { cart });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -86,7 +108,7 @@ cartsRouter.put('/:cartId/updateProduct/:productId', async (req, res) => {
         cart.cart[productIndex].cant = cant;
         await cart.save();
 
-        res.json(cart);
+        res.render('carts', { cart });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -105,10 +127,8 @@ cartsRouter.delete('/:cartId/removeProduct/:productId', async (req, res) => {
         cart.cart = cart.cart.filter((item) => item.productID !== req.params.productId);
         await cart.save();
 
-        res.json(cart);
+        res.render('carts', { cart });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 });
-
-export default cartsRouter;

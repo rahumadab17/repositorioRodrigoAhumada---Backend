@@ -4,17 +4,17 @@ import { randomUUID } from 'crypto'
 const cartSchema = new Schema({
     _id: { type: String, default: randomUUID },
     cart: [{ 
-        productID: { type: String, ref: 'products' }, 
+        productID: { type: Schema.Types.ObjectId, ref: 'products' }, // Cambiado de 'productID' a 'product'
         cant: { type: Number }
-        }]
+    }]
 }, {
     strict: 'throw',
-        versionKey: false,
-            methods: { }
-})
+    versionKey: false,
+    methods: {}
+});
 
 cartSchema.pre('find', function (next) {
-    this.populate('carts.$.productID')
+    this.populate('cart.productID')
     next()
 })
 
