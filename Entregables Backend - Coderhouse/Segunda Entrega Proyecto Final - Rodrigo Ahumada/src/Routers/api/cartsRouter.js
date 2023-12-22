@@ -1,6 +1,6 @@
 import express from 'express';
-import { Product } from '../models/productsMongoose.js'
-import { Cart } from '../models/cartsMongoose.js'
+import { Product } from '../../../../../../../../Downloads/repositorioRodrigoAhumada-main (2)/repositorioRodrigoAhumada-main/Entregables Backend - Coderhouse/Segunda Entrega Proyecto Final - Rodrigo Ahumada/src/models/productsMongoose.js'
+import { Cart } from '../../../../../../../../Downloads/repositorioRodrigoAhumada-main (2)/repositorioRodrigoAhumada-main/Entregables Backend - Coderhouse/Segunda Entrega Proyecto Final - Rodrigo Ahumada/src/models/cartsMongoose.js'
 
 export const cartsRouter = express.Router();
 

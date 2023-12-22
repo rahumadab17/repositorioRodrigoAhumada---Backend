@@ -4,7 +4,7 @@ import { randomUUID } from 'crypto'
 const cartSchema = new Schema({
     _id: { type: String, default: randomUUID },
     cart: [{ 
-        productID: { type: Schema.Types.ObjectId, ref: 'products' }, // Cambiado de 'productID' a 'product'
+        productID: { type: Schema.Types.ObjectId, ref: 'products' }, 
         cant: { type: Number }
     }]
 }, {

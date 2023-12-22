@@ -1,5 +1,5 @@
 import express from 'express';
-import { Product } from '../models/productsMongoose.js'
+import { Product } from '../../../../../../../../Downloads/repositorioRodrigoAhumada-main (2)/repositorioRodrigoAhumada-main/Entregables Backend - Coderhouse/Segunda Entrega Proyecto Final - Rodrigo Ahumada/src/models/productsMongoose.js'
 
 export const productsRouter = express.Router();
 

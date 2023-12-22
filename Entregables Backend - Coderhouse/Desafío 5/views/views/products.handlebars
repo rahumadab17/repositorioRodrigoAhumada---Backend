@@ -1,0 +1,28 @@
+<div class="card-body">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Producto</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Categoría</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Stock</th>
+                <th scope="col">Agregar al Carrito</th>
+            </tr>
+        </thead>
+        <tbody id="contenedorProductos">
+        {{#each products}}
+            <tr>
+                <td>{{title}}</td>
+                <td>{{description}}</td>
+                <td>{{category}}</td>
+                <td>{{price}}</td>
+                <td>{{stock}}</td>
+                <td>
+                <button class="addToCartButton" data-product-id="{{_id}}">Agregar al Carrito</button>
+                </td>
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
+</div>

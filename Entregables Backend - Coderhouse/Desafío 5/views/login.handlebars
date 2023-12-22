@@ -1,0 +1,23 @@
+{{>navbarNoLog}}
+<div class="card w-25" style="margin:0 auto;">
+    <h5 class="card-header">Inicie Sesión</h5>
+    <div class="card-body">
+        <form action="/login" method="POST">
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Email</label>
+                <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp">
+                <div id="emailHelp" class="form-text">Ingrese su mail para iniciar</div>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Password</label>
+                <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+            </div>
+            {{#if retryLogin}}
+            <div class="alert alert-warning" role="alert">
+                Usuario y/o contraseña incorrecta. Vuelva a intentarlo
+            </div>
+            {{/if}}
+            <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+        </form>
+    </div>
+</div>
