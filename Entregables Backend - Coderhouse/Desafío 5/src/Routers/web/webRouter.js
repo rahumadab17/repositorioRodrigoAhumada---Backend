@@ -1,6 +1,6 @@
 import { Router, json, urlencoded } from "express";
 import { sessionRouterWeb } from "./sessionRouterWeb.js";
-import { userRouterWeb } from "./users.router.web.js";
+import { userRouterWeb } from "./usersRouterWeb.js";
 import { productsRouter } from "../web/productsRouterWeb.js";
 
 export const webRouter = Router()
