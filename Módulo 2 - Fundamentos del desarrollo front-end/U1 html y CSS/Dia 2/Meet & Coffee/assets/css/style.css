@@ -120,6 +120,7 @@ header h3 {
 #evetosAnteriores div, img {
     width: 350px;
     border-radius: 5px;
+    filter: sepia(0.3);
 }
 
 footer {
@@ -139,3 +140,32 @@ footer a {
     text-decoration: none;
     color: white;
 }
+
+#simposioVegan {
+    padding: 70px 417px 70px 418px;
+}
+
+#simposioVegan img {
+    width: 1085px;
+    height: 565;
+    margin-bottom: 50px;
+    filter: sepia(0.3);
+}
+
+#simposioVegan h1 {
+    font-size: 45px;
+    margin-bottom: 50px;
+}
+
+#simposioVegan h2 {
+    font-size: 40px;
+    margin-bottom: 50px;
+}
+
+#simposioVegan p {
+    font-size: 25px;
+    margin-bottom: 50px;
+    line-height: 1,5em;
+    white-space: inherit;
+}
+
